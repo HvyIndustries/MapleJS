@@ -11,17 +11,17 @@
         "url": "https://github.com/HvyIndustries/MapleJS"
     },
     "engines": {
-        "vscode": "^1.23.0"
+        "vscode": "^1.25.0"
     },
     "scripts": {
         "update-vscode": "node ./node_modules/vscode/bin/install",
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "dependencies": {
-        "vscode-languageclient": "^4.1.4"
+        "vscode-languageclient": "^5.1.1"
     },
     "devDependencies": {
         "@types/node": "^10.12.12",
-        "vscode": "^1.1.21"
+        "vscode": "^1.1.26"
     }
 }

@@ -23,7 +23,7 @@
         "productivity"
     ],
     "engines": {
-        "vscode": "^1.23.0"
+        "vscode": "^1.25.0"
     },
     "activationEvents": [
         "workspaceContains:*.js"
