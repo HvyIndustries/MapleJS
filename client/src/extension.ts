@@ -4,7 +4,9 @@
  * ------------------------------------------------------------------------------------------ */
 import * as path from "path";
 import {
-    workspace as Workspace, window as Window, ExtensionContext, TextDocument, OutputChannel, WorkspaceFolder, Uri
+    workspace as Workspace,
+    window as Window,
+    ExtensionContext, TextDocument, OutputChannel, WorkspaceFolder, Uri, StatusBarAlignment
 } from "vscode";
 
 import {
@@ -117,6 +119,12 @@ export function activate(context: ExtensionContext) {
             }
         }
     });
+
+    // Create a status bar item
+    const status = Window.createStatusBarItem(StatusBarAlignment.Left, 1000000);
+    status.text = "TEST";
+    context.subscriptions.push(status);
+    status.show();
 }
 
 export function deactivate(): Thenable<void> {
