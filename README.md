@@ -4,26 +4,26 @@ VS Code plugin that provides AngularJS code completion and navigation
 
 ## Project Goals
 
-- Code completion in HTML files
-    - Controller properties & functions
-    - Scope & rootScope properties and functions
-    - Other Components, Directives, etc
-    - Properties/functions from services
-    - Angular specific properties, directive types, etc
+- [ ] Code completion in HTML files
+    - [ ] Controller properties & functions
+    - [ ] Scope & rootScope properties and functions
+    - [ ] Other Components, Directives, etc
+    - [ ] Properties/functions from services
+    - [ ] Angular specific properties, directive types, etc
 
-- Code navigation (+ peek definition)
-    - Go to definition of Component, Directive, etc
-    - Go to controller property/function
-    - Go to service property/function
-    - Go to scope property/function
+- [ ] Code navigation (+ peek definition)
+    - [ ] Go to definition of Component, Directive, etc
+    - [ ] Go to controller property/function
+    - [ ] Go to service property/function
+    - [ ] Go to scope property/function
 
-- Hover provider (in HTML)
-- Signature provider
-- Workspace & document symbols
-- HTML syntax highlighting + code completion within JS files
+- [ ] Hover provider (in HTML)
+- [ ] Signature provider
+- [ ] Workspace & document symbols
+- [ ] HTML syntax highlighting + code completion within JS files
 
-- JSDoc comment generation
-- Component/service/directive generation (JS + CSS + HTML + Spec file -- configurable)
+- [ ] JSDoc comment generation
+- [ ] Component/service/directive generation (JS + CSS + HTML + Spec file -- configurable)
 
 
 ## Changelog
