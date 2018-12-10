@@ -20,7 +20,7 @@ VS Code plugin that provides AngularJS code completion and navigation
 - [ ] Hover provider (in HTML)
 - [ ] Signature provider
 - [ ] Workspace & document symbols
-- [ ] HTML syntax highlighting + code completion within JS files
+- [ ] HTML syntax highlighting + code completion within JS files (based on https://github.com/natewallace/angular2-inline/tree/master/src)
 
 - [ ] JSDoc comment generation
 - [ ] Component/service/directive generation (JS + CSS + HTML + Spec file -- configurable)
