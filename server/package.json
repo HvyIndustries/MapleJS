@@ -1,0 +1,19 @@
+{
+    "name": "maplejs-server",
+    "description": "Language server for MapleJS",
+    "version": "1.0.0",
+    "author": "Hvy Industries",
+    "private": true,
+    "license": "AGPL-3.0",
+    "engines": {
+        "node": "*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/HvyIndustries/MapleJS"
+    },
+    "dependencies": {
+        "vscode-languageserver": "^4.1.3"
+    },
+    "scripts": {}
+}
