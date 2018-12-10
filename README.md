@@ -30,6 +30,18 @@ VS Code plugin that provides AngularJS code completion and navigation
 
 - TODO
 
+
+## Running code for development
+
+ - Run `npm install` in this folder. This installs all necessary npm modules in both the client and server folder
+ - Open VS Code on this folder.
+ - Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> to compile the client and server
+ - Switch to the Debug sidebar pane
+ - Select `Launch Client` from the drop down
+ - Run the launch config
+ - If you want to debug the server as well use the launch configuration `Attach to Server`
+
+
 ## Links
 
 - [Repository](https://github.com/nevadascout/MapleJS)
