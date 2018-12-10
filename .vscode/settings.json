@@ -1,0 +1,6 @@
+{
+    "editor.insertSpaces": true,
+    "tslint.enable": true,
+    "typescript.tsc.autoDetect": "off",
+    "typescript.preferences.quoteStyle": "double"
+}
