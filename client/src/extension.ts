@@ -122,7 +122,7 @@ export function activate(context: ExtensionContext) {
 
     // Create a status bar item
     const status = Window.createStatusBarItem(StatusBarAlignment.Left, 1000000);
-    status.text = "TEST";
+    status.text = "MapleJS";
     context.subscriptions.push(status);
     status.show();
 }
