@@ -13,7 +13,10 @@
         "url": "https://github.com/HvyIndustries/MapleJS"
     },
     "dependencies": {
-        "vscode-languageserver": "^5.1.0"
+        "vscode-languageserver": "^5.1.0",
+        "acorn": "^6.0.4",
+        "acorn-loose": "^6.0.0",
+        "acorn-walk": "^6.1.1"
     },
     "scripts": {}
 }
