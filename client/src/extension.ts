@@ -52,11 +52,17 @@ function getOuterMostWorkspaceFolder(folder: WorkspaceFolder): WorkspaceFolder {
 export function activate(context: ExtensionContext) {
 
     let module = context.asAbsolutePath(path.join("server", "out", "server.js"));
-    let outputChannel: OutputChannel = Window.createOutputChannel("lsp-multi-server-example");
+    let outputChannel: OutputChannel = Window.createOutputChannel("MapleJS");
 
     function didOpenTextDocument(document: TextDocument): void {
-        // We are only interested in language mode text
-        if (document.languageId !== "plaintext" || (document.uri.scheme !== "file" && document.uri.scheme !== "untitled")) {
+        const languageIds = [
+            "plaintext",
+            "javascript",
+            "html"
+        ];
+
+        if (languageIds.indexOf(document.languageId) === -1 || (document.uri.scheme !== "file" && document.uri.scheme !== "untitled")) {
+        // if (document.languageId !== "plaintext" || (document.uri.scheme !== "file" && document.uri.scheme !== "untitled")) {
             return;
         }
 
@@ -70,21 +76,26 @@ export function activate(context: ExtensionContext) {
             };
             let clientOptions: LanguageClientOptions = {
                 documentSelector: [
-                    { scheme: "untitled", language: "plaintext" }
+                    { scheme: "untitled", language: "plaintext" },
+                    { language: "javascript" },
+                    { language: "html" },
                 ],
-                diagnosticCollectionName: "lsp-multi-server-example",
+                diagnosticCollectionName: "maplejs",
                 outputChannel: outputChannel
             }
-            defaultClient = new LanguageClient("lsp-multi-server-example", "LSP Multi Server Example", serverOptions, clientOptions);
+            defaultClient = new LanguageClient("maplejs", "MapleJS - AngularJS Language Server", serverOptions, clientOptions);
             defaultClient.start();
             return;
         }
+
         let folder = Workspace.getWorkspaceFolder(uri);
+
         // Files outside a folder can't be handled. This might depend on the language.
         // Single file languages like JSON might handle files outside the workspace folders.
         if (!folder) {
             return;
         }
+
         // If we have nested workspace folders we only start a server on the outer most workspace folder.
         folder = getOuterMostWorkspaceFolder(folder);
 
@@ -94,15 +105,20 @@ export function activate(context: ExtensionContext) {
                 run: { module, transport: TransportKind.ipc },
                 debug: { module, transport: TransportKind.ipc, options: debugOptions}
             };
+
             let clientOptions: LanguageClientOptions = {
                 documentSelector: [
-                    { scheme: "file", language: "plaintext", pattern: `${folder.uri.fsPath}/**/*` }
+                    { scheme: "file", language: "plaintext", pattern: `${folder.uri.fsPath}/**/*` },
+                    { scheme: "file", language: "javascript", pattern: `${folder.uri.fsPath}/**/*` },
+                    { scheme: "file", language: "html", pattern: `${folder.uri.fsPath}/**/*` },
                 ],
-                diagnosticCollectionName: "lsp-multi-server-example",
+                diagnosticCollectionName: "maplejs",
                 workspaceFolder: folder,
                 outputChannel: outputChannel
             }
-            let client = new LanguageClient("lsp-multi-server-example", "LSP Multi Server Example", serverOptions, clientOptions);
+
+            let client = new LanguageClient("maplejs", "MapleJS - AngularJS Language Server", serverOptions, clientOptions);
+
             client.start();
             clients.set(folder.uri.toString(), client);
         }
