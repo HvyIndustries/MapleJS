@@ -13,12 +13,8 @@ import {
     SymbolKind
 } from "vscode-languageserver";
 import { HandlerResult } from "vscode-jsonrpc";
-
-// import * as acorn from "acorn";
-
-// const js = "";
-// const options: acorn.Options = {};
-// acorn.parse(js, options);
+import { MapleJS } from "./core/maplejs";
+import { Logger } from "./core/util/logger";
 
 // Creates the LSP connection
 let connection = createConnection(ProposedFeatures.all);
@@ -29,19 +25,36 @@ let documents = new TextDocuments();
 // The workspace folder this server is operating on
 let workspaceFolder: string | null;
 
-documents.onDidOpen((event) => {
-    connection.console.log(`[Server(${process.pid}) ${workspaceFolder}] Document opened: ${event.document.uri}`);
-})
-documents.listen(connection);
+const logger = new Logger(connection);
+// TODO: convert this to plugin setting
+logger.debugEnabled = true;
+
+const maplejs = new MapleJS(logger);
+
+// const hoverProvider = new HoverProvider(maplejs, logger);
+// const definitionProvider = new DefinitionProvider(maplejs, logger);
+// const documentSymbolProvider = new DocumentSymbolProvider(maplejs, logger);
+// const workspaceSymbolProvider = new WorkspaceSymbolProvider(maplejs, logger);
+
+let timer = null;
 
 connection.onInitialize((params) => {
     workspaceFolder = params.rootUri;
-    connection.console.log(`[Server(${process.pid}) ${workspaceFolder}] Started and initialize received`);
+    maplejs.workspaceFolder = workspaceFolder;
+    logger.setWorkspaceFolder(workspaceFolder);
 
-    // TODO: start parsing & building tree for workspaceFolder
-    //  - all components + link to HTML file
-    //  - services
-    //  - directives
+    logger.log("Started server initialization");
+
+    maplejs.buildAstForWorkspace();
+
+    // Prevent garbage collection of essential maplejs object
+    // TODO: is this needed?
+    if (timer != null) {
+        clearTimeout(timer);
+    }
+    timer = setInterval(() => {
+        return maplejs.ast.length;
+    }, 15000);
 
     return {
         capabilities: {
@@ -66,7 +79,6 @@ connection.onInitialize((params) => {
         }
     }
 });
-connection.listen();
 
 // TODO: replace inline handler function with reference to class method
 connection.onDocumentSymbol((params, cancelToken): Promise<SymbolInformation[]> => {
@@ -110,3 +122,12 @@ connection.onHover((params, cancelToken): HandlerResult<Hover, void> => {
 connection.onDefinition((params, cancelToken): HandlerResult<Definition, void> => {
     return null;
 });
+
+
+
+documents.onDidOpen((event) => {
+    logger.log(`Document opened: ${event.document.uri}`);
+})
+
+documents.listen(connection);
+connection.listen();
